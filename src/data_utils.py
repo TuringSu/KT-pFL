@@ -158,26 +158,26 @@ def getdataset(args,conf_dict):
            [public_dataset,private_data, total_private_data,private_test_data ]
 
 # 磁盘载入array数据
-def get_dataarray(args,dataset):
+def get_dataarray(args, dataset):
     """ Returns train and test dataarray
     """
-    data_dir = '../data/'+dataset
+    data_dir = '../data/' + dataset
     if dataset == 'cifar10':
         train_dataset = datasets.CIFAR10(data_dir, train=True, download=True)
         test_dataset = datasets.CIFAR10(data_dir, train=False, download=True)
-    elif dataset=='mnist':
+    elif dataset == 'mnist':
         train_dataset = datasets.MNIST(data_dir, train=True, download=True)
         test_dataset = datasets.MNIST(data_dir, train=False, download=True)
-        # sample training data amongst users FashionMNIST
-    elif dataset=='fmnist':
+    elif dataset == 'fmnist':
         train_dataset = datasets.FashionMNIST(data_dir, train=True, download=True)
         test_dataset = datasets.FashionMNIST(data_dir, train=False, download=True)
     elif dataset == 'cifar100':
         train_dataset = datasets.CIFAR100(data_dir, train=True, download=True)
         test_dataset = datasets.CIFAR100(data_dir, train=False, download=True)
-    X_train, y_train= train_dataset.train_data,train_dataset.train_labels
-    X_test, y_test = test_dataset.test_data,test_dataset.test_labels
+    X_train, y_train = train_dataset.data, train_dataset.targets
+    X_test, y_test = test_dataset.data, test_dataset.targets
     return np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test)
+
 
 # 每类采样
 def get_sample_data(X_train_private, y_train_private,users_index,N_samples_per_class=10):
