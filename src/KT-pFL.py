@@ -25,9 +25,9 @@ def pretrain(pre_train_data,config_info):
     for i, item in enumerate(conf_dict["models"]):
         model_name = item["model_type"]
         model_params = item["params"]
-        # tmp = CANDIDATE_MODELS[model_name](n_classes=10,
-        #                                    **model_params)
-        tmp = CANDIDATE_MODELS[model_name]()         
+        tmp = CANDIDATE_MODELS[model_name](n_classes=10,
+                                           **model_params)
+#        tmp = CANDIDATE_MODELS[model_name]()         
         print("model {0} : {1}".format(i, conf_dict["model_saved_names"][i]))
         parties.append(tmp)
 
